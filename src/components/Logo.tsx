@@ -1,7 +1,7 @@
 interface SVGProps {
 	logoWidth: number;
 	logoHeight: number;
-	className: string;
+	className?: string;
 }
 
 const Logo = (props: SVGProps) => (
