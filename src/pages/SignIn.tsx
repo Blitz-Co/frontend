@@ -4,11 +4,28 @@ import '../assets/styles/styles.css';
 import StyledButton from '../components/StyledButton';
 import TextButton from '../components/TextButton';
 import SVGArrow from '../components/SVGArrow';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SVGEmailIcon from '../components/SVGEmailIcon';
 import SVGLockIcon from '../components/SVGLockIcon';
+import { useFormik } from 'formik';
+import { signInScheme } from '../schemes/scheme';
 
+const initialValues = {
+	email: '',
+	password: '',
+};
 const SignIn = () => {
+	const navigate = useNavigate();
+
+	const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+		initialValues,
+		validationSchema: signInScheme,
+		onSubmit: (values, action) => {
+			action.resetForm();
+			console.log(values);
+			navigate('/home');
+		},
+	});
 	return (
 		<div className="main">
 			<Logo logoWidth={194} logoHeight={77} />
@@ -16,23 +33,38 @@ const SignIn = () => {
 				<h1>Sveicināts Blitz!</h1>
 				<h3>Ielogojies, lai turpinātu.</h3>
 			</div>
-			<form>
-				<InputForm
-					childComp={<SVGEmailIcon />}
-					name="email"
-					type="email"
-					labelName="E-PASTS"
-					placeholder="E-pasts"
-				/>
-				<InputForm
-					childComp={<SVGLockIcon />}
-					minLenght={8}
-					maxLenght={40}
-					name="password"
-					type="password"
-					labelName="PAROLE"
-					placeholder="Parole"
-				/>
+			<form onSubmit={handleSubmit}>
+				<div>
+					<InputForm
+						childComp={<SVGEmailIcon />}
+						name="email"
+						value={values.email}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						type="email"
+						labelName="E-PASTS"
+						placeholder="E-pasts"
+					/>
+					{errors.email && touched.email ? (
+						<p className="form-error">{errors.email}</p>
+					) : null}
+				</div>
+				<div>
+					<InputForm
+						childComp={<SVGLockIcon />}
+						name="password"
+						value={values.password}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						type="password"
+						labelName="PAROLE"
+						placeholder="Parole"
+					/>
+
+					{errors.password && touched.password ? (
+						<p className="form-error">{errors.password}</p>
+					) : null}
+				</div>
 				<StyledButton type="submit" text="IELOGOTIES" />
 			</form>
 			<div>

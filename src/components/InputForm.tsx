@@ -1,11 +1,12 @@
 interface LabelProps {
 	labelName: string;
-	type?: string;
+	type: string;
 	name: string;
 	placeholder: string;
-	minLenght?: number;
-	maxLenght?: number;
 	childComp?: React.ReactNode;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputForm = (props: LabelProps) => {
@@ -16,13 +17,7 @@ const InputForm = (props: LabelProps) => {
 				<span className="label">{props.labelName}</span>
 				<div className="SVG-Input">
 					<div>{childComp}</div>
-					<input
-						type="text"
-						required
-						minLength={props.minLenght}
-						maxLength={props.maxLenght}
-						{...props}
-					/>
+					<input {...props} />
 				</div>
 			</label>
 		</div>

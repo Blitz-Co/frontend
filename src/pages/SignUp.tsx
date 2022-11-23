@@ -4,12 +4,32 @@ import StyledButton from '../components/StyledButton';
 import SVGArrow from '../components/SVGArrow';
 import TextButton from '../components/TextButton';
 import '../assets/styles/styles.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import SVGEmailIcon from '../components/SVGEmailIcon';
 import SVGLockIcon from '../components/SVGLockIcon';
 import SVGIDIcon from '../components/SVGIDIcon';
+import { useFormik } from 'formik';
+import { signUpScheme } from '../schemes/scheme';
+
+const initialValues = {
+	email: '',
+	password: '',
+	deviceID: '',
+	confirm_password: '',
+};
 
 const SignUp = () => {
+	const navigate = useNavigate();
+
+	const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+		initialValues,
+		validationSchema: signUpScheme,
+		onSubmit: (values, action) => {
+			action.resetForm();
+			console.log(values);
+			navigate('/home');
+		},
+	});
 	return (
 		<div className="main">
 			<Logo logoWidth={194} logoHeight={77} />
@@ -17,38 +37,68 @@ const SignUp = () => {
 				<h1>Sveicināts Blitz!</h1>
 				<h3>Reģistrējies, lai turpinātu.</h3>
 			</div>
-			<form>
-				<InputForm
-					childComp={<SVGEmailIcon />}
-					name="email"
-					type="email"
-					labelName="E-PASTS"
-					placeholder="E-pasts"
-				/>
-				<InputForm
-					childComp={<SVGIDIcon />}
-					name="device-id"
-					labelName="iIERĪCES_ID"
-					placeholder="Ierīces_ID"
-				/>
-				<InputForm
-					childComp={<SVGLockIcon />}
-					name="password"
-					type="password"
-					labelName="PAROLE"
-					placeholder="Parole"
-					minLenght={8}
-					maxLenght={40}
-				/>
-				<InputForm
-					childComp={<SVGLockIcon />}
-					name="confirm"
-					type="password"
-					labelName="ATKARTOJIET PAROLI"
-					placeholder="Atkartojiet paroli"
-					minLenght={8}
-					maxLenght={40}
-				/>
+			<form onSubmit={handleSubmit}>
+				<div>
+					<InputForm
+						childComp={<SVGEmailIcon />}
+						name="email"
+						value={values.email}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						type="email"
+						labelName="E-PASTS"
+						placeholder="E-pasts"
+					/>
+					{errors.email && touched.email ? (
+						<p className="form-error">{errors.email}</p>
+					) : null}
+				</div>
+				<div>
+					<InputForm
+						childComp={<SVGIDIcon />}
+						name="deviceID"
+						value={values.deviceID}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						type="text"
+						labelName="iIERĪCES_ID"
+						placeholder="Ierīces_ID"
+					/>
+					{errors.deviceID && touched.deviceID ? (
+						<p className="form-error">{errors.deviceID}</p>
+					) : null}
+				</div>
+				<div>
+					<InputForm
+						childComp={<SVGLockIcon />}
+						name="password"
+						value={values.password}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						type="password"
+						labelName="PAROLE"
+						placeholder="Parole"
+					/>
+					{errors.password && touched.password ? (
+						<p className="form-error">{errors.password}</p>
+					) : null}
+				</div>
+				<div>
+					<InputForm
+						childComp={<SVGLockIcon />}
+						name="confirm_password"
+						value={values.confirm_password}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						type="password"
+						labelName="ATKARTOJIET PAROLI"
+						placeholder="Atkartojiet paroli"
+					/>
+
+					{errors.confirm_password && touched.confirm_password ? (
+						<p className="form-error">{errors.confirm_password}</p>
+					) : null}
+				</div>
 
 				<StyledButton type="submit" text="REĢISTRETIES" />
 			</form>
