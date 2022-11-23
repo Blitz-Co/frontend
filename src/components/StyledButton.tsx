@@ -1,6 +1,6 @@
 interface StyledButtonProps {
 	text: string;
-	type: 'submit' | 'reset' | 'button';
+	type: 'submit' | 'button';
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 const StyledButton = (props: StyledButtonProps) => {
