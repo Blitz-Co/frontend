@@ -1,0 +1,38 @@
+.container {
+	height: 100vh;
+}
+.info-box {
+	display: flex;
+	flex-direction: column;
+	background-color: #f3f3f3;
+	gap: 10px;
+	padding: 10px 10px 10px 10px;
+	margin-top: 24px;
+	width: 42%;
+	box-shadow: 1px 2px 4px 1px rgba(0, 0, 0, 0.2);
+
+	border-radius: 25px;
+}
+
+.info-box p {
+	font-weight: bold;
+	font-size: 15px;
+	color: #000000;
+	text-align: center;
+	margin: 0;
+}
+.info-box #text {
+	font-weight: normal;
+}
+
+.important-info {
+	display: flex;
+	flex-direction: column;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+.column-1 {
+	justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+}

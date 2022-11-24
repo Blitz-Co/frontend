@@ -1,13 +1,13 @@
 import InputForm from '../components/InputForm';
-import Logo from '../components/Logo';
+import Logo from '../components/SVGComponents/Logo';
 import StyledButton from '../components/StyledButton';
-import SVGArrow from '../components/SVGArrow';
+import SVGArrow from '../components/SVGComponents/SVGArrow';
 import TextButton from '../components/TextButton';
-import '../assets/styles/styles.css';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import SVGEmailIcon from '../components/SVGEmailIcon';
-import SVGLockIcon from '../components/SVGLockIcon';
-import SVGIDIcon from '../components/SVGIDIcon';
+import '../assets/styles/sign-in-out.css';
+import { Link, useNavigate } from 'react-router-dom';
+import SVGEmailIcon from '../components/SVGComponents/SVGEmailIcon';
+import SVGLockIcon from '../components/SVGComponents/SVGLockIcon';
+import SVGIDIcon from '../components/SVGComponents/SVGIDIcon';
 import { useFormik } from 'formik';
 import { signUpScheme } from '../schemes/scheme';
 
@@ -32,7 +32,7 @@ const SignUp = () => {
 	});
 	return (
 		<div className="main">
-			<Logo logoWidth={194} logoHeight={77} />
+			<Logo />
 			<div className="text">
 				<h1>Sveicināts Blitz!</h1>
 				<h3>Reģistrējies, lai turpinātu.</h3>

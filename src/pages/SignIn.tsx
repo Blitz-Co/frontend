@@ -1,12 +1,12 @@
 import InputForm from '../components/InputForm';
-import Logo from '../components/Logo';
-import '../assets/styles/styles.css';
+import Logo from '../components/SVGComponents/Logo';
+import '../assets/styles/sign-in-out.css';
 import StyledButton from '../components/StyledButton';
 import TextButton from '../components/TextButton';
-import SVGArrow from '../components/SVGArrow';
+import SVGArrow from '../components/SVGComponents/SVGArrow';
 import { Link, useNavigate } from 'react-router-dom';
-import SVGEmailIcon from '../components/SVGEmailIcon';
-import SVGLockIcon from '../components/SVGLockIcon';
+import SVGEmailIcon from '../components/SVGComponents/SVGEmailIcon';
+import SVGLockIcon from '../components/SVGComponents/SVGLockIcon';
 import { useFormik } from 'formik';
 import { signInScheme } from '../schemes/scheme';
 
@@ -28,7 +28,7 @@ const SignIn = () => {
 	});
 	return (
 		<div className="main">
-			<Logo logoWidth={194} logoHeight={77} />
+			<Logo />
 			<div className="text">
 				<h1>Sveicināts Blitz!</h1>
 				<h3>Ielogojies, lai turpinātu.</h3>
